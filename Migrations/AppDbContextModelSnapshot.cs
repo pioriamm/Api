@@ -63,6 +63,15 @@ namespace Api.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PassWord")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("varchar(9)");
+
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasMaxLength(15)
