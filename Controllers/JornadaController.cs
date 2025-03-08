@@ -42,6 +42,29 @@ public class JornadaController : ControllerBase
         return Ok(listaJornadas);
     }
     
+    [HttpGet("ListarTodasJornadasData/{motorista}")]
+    public ActionResult<IEnumerable<object>> ListarTodasJornadasData(string motorista)
+    {
+        var hoje = DateTime.Now;
+        var dataInicio = new DateOnly(hoje.Year, hoje.Month-1, 20);
+        var dataFim = DateOnly.FromDateTime(DateTime.Now);
+    
+        if (string.IsNullOrEmpty(motorista))
+            return BadRequest("Parâmetros inválidos.");
+
+        if (!Guid.TryParse(motorista, out Guid motoristaId))
+            return BadRequest("ID do motorista inválido.");
+
+        var jornadaFiltrada = _context.Jornadas
+            .Where(jornada => jornada.JornadaData >= dataInicio 
+                              && jornada.JornadaData <= dataFim 
+                              && jornada.MotoristaID == motoristaId)
+            .ToList();
+
+        return Ok(jornadaFiltrada);
+    }
+
+    
     [HttpGet("porMotoristaID/{id}")] 
     public ActionResult<IEnumerable<object>> ListarTodasJornadasPeloMotorista(Guid id)
     {
