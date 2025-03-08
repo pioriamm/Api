@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Context;
 using Api.Models;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -18,7 +19,7 @@ public class JornadaController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<object>> Get()
+    public ActionResult<IEnumerable<object>> ListarTodasJornadas()
     {
         var listaJornadas = _context.Jornadas?
             .Include(j => j.Motorista).ToList().Select(j => new
@@ -40,33 +41,9 @@ public class JornadaController : ControllerBase
 
         return Ok(listaJornadas);
     }
-
-    [HttpGet("porID/{id}")] 
-    public ActionResult<Jornada> GetJornadaPorId(Guid id )
-    {
-        var jornada = _context.Jornadas?
-            .Include(j => j.Motorista)
-            .FirstOrDefault(j => j.QuilometragemId == id);;
-        
-        if (jornada == null)
-        {
-            return NotFound();
-        }
-        return Ok(new
-        {
-            jornada.QuilometragemId,
-            jornada.JornadaData,
-            jornada.JornadaHora,
-            jornada.MotoristaID,
-            jornada.Motorista?.DisplayName,
-            jornada.Placa,
-            jornada.Km
-        });
-    }
-    
     
     [HttpGet("porMotoristaID/{id}")] 
-    public ActionResult<IEnumerable<object>> GetJornadaPorMotoristaId(Guid id)
+    public ActionResult<IEnumerable<object>> ListarTodasJornadasPeloMotorista(Guid id)
     {
         var listaJornadas = _context.Jornadas?
             .Include(j => j.Motorista)
@@ -91,10 +68,35 @@ public class JornadaController : ControllerBase
 
         return Ok(listaJornadas);
     }
+    
+    
+
+    [HttpGet("porID/{id}")] 
+    public ActionResult<Jornada> ObterJornadaPeloId(Guid id )
+    {
+        var jornada = _context.Jornadas?
+            .Include(j => j.Motorista)
+            .FirstOrDefault(j => j.QuilometragemId == id);;
+        
+        if (jornada == null)
+        {
+            return NotFound();
+        }
+        return Ok(new
+        {
+            jornada.QuilometragemId,
+            jornada.JornadaData,
+            jornada.JornadaHora,
+            jornada.MotoristaID,
+            jornada.Motorista?.DisplayName,
+            jornada.Placa,
+            jornada.Km
+        });
+    }
 
     
     [HttpGet("nova-jornada/{id}", Name = "GetNovaJornada")]
-    public ActionResult<Jornada> GetNovaJornada(Guid id )
+    public ActionResult<Jornada> MostrarNovaJornada(Guid id )
     {
         var jornada = _context.Jornadas?
             .Include(j => j.Motorista)
@@ -118,7 +120,7 @@ public class JornadaController : ControllerBase
     
 
     [HttpPost]
-    public ActionResult<Jornada> Post([FromBody] Jornada jornada)
+    public ActionResult<Jornada> RegistrarNovaJornada([FromBody] Jornada jornada)
     {
         if (jornada == null) return BadRequest();
         
@@ -127,4 +129,26 @@ public class JornadaController : ControllerBase
         
         return CreatedAtRoute("GetNovaJornada", new { id = jornada.QuilometragemId }, jornada);
     }
+
+
+    [HttpGet("auditoria/{dataInicio}/{dataFim}/{motorista}")]
+    public ActionResult<double> Auditoria(DateOnly dataInicio, DateOnly dataFim, string motorista)
+    {
+        if (string.IsNullOrEmpty(motorista))
+            return BadRequest("Parâmetros inválidos.");
+
+        if (!Guid.TryParse(motorista, out Guid motoristaId))
+            return BadRequest("ID do motorista inválido.");
+
+        var jornadaFiltrada = _context.Jornadas
+            .Where(jornada => jornada.JornadaData >= dataInicio 
+                              && jornada.JornadaData <= dataFim 
+                              && jornada.MotoristaID == motoristaId)
+            .Sum(jornada => jornada.Km);
+
+        return Ok(jornadaFiltrada);
+    }
+
+
+
 }
