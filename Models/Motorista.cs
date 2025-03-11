@@ -15,8 +15,6 @@ public class Motorista
     public Guid MotoristaID { get; set; }
 
     [Required] [StringLength(100)] public string? DisplayName { get; set; }
-
-
     
     [Required]
     [EmailAddress(ErrorMessage = "E-mail inválido.")]

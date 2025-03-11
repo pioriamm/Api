@@ -5,7 +5,9 @@ namespace Api.Models;
 
 [Table("Jornada")]
 public class Jornada
-{   [Key]
+{   
+    
+    [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid QuilometragemId { get; set; }
     
