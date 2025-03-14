@@ -13,7 +13,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbConte
             .Build();
 
         var builder = new DbContextOptionsBuilder<AppDbContext>();
-        var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var connectionString = configuration.GetConnectionString("Railway");
         builder.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 
         return new AppDbContext(builder.Options);
