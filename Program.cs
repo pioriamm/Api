@@ -8,7 +8,7 @@ builder.Services.AddSwaggerGen();
 
 
 
-var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+var mySqlConnection = builder.Configuration.GetConnectionString("Railway");
 builder.Services.AddDbContext<AppDbContext>(options=> options.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddControllers();
