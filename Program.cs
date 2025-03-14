@@ -6,10 +6,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
+
+if (builder.Environment.IsProduction())
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
 
 
 var mySqlConnection = builder.Configuration.GetConnectionString("Railway");
-builder.Services.AddDbContext<AppDbContext>(options=> options.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddControllers();
 
