@@ -29,7 +29,10 @@ public class Motorista
     [Required]
     [StringLength(15)]
     public string? Telefone { get; set; }
-    
+
+    [Required]
+    public bool? isAdim { get; set; }
+
     [JsonIgnore]
     public ICollection<Jornada> Jornadas { get; set; }
     
