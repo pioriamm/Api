@@ -12,6 +12,8 @@ public class AppDbContext : DbContext
 
     public DbSet<Jornada>? Jornadas { get; set; }
     public DbSet<Motorista>? Motoristas { get; set; }
+
+
 }
 
 

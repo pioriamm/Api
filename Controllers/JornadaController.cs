@@ -18,9 +18,11 @@ public class JornadaController : ControllerBase
         _context = context;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<object>> ListarTodasJornadas()
+    [HttpGet("listarTodasJornadas")]
+    public ActionResult<IEnumerable<Jornada>> ListarTodasJornadas()
     {
+           
+
         var listaJornadas = _context.Jornadas?
             .Include(j => j.Motorista).ToList().Select(j => new
             {
@@ -36,7 +38,7 @@ public class JornadaController : ControllerBase
 
         if (listaJornadas == null || !listaJornadas.Any())
         {
-            return NotFound();
+            return NotFound("Nenhuma jornada encontrada no banco.");
         }
 
         return Ok(listaJornadas);
@@ -142,7 +144,7 @@ public class JornadaController : ControllerBase
     }
     
 
-    [HttpPost]
+    [HttpPost ("criarNovaJornada")]
     public ActionResult<Jornada> RegistrarNovaJornada([FromBody] Jornada jornada)
     {
         if (jornada == null) return BadRequest();
@@ -150,7 +152,7 @@ public class JornadaController : ControllerBase
         _context.Jornadas?.Add(jornada);
         _context.SaveChanges();
         
-        return CreatedAtRoute("GetNovaJornada", new { id = jornada.QuilometragemId }, jornada);
+        return Ok(jornada);
     }
 
 

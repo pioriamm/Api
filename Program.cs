@@ -6,19 +6,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var stringConexaoBanco = builder.Configuration.GetConnectionString("Railway");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(stringConexaoBanco, ServerVersion.AutoDetect(stringConexaoBanco)));
+
+builder.Services.AddControllers();
+
+
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 
 if (builder.Environment.IsProduction())
 {
     builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 }
-
-
-
-var mySqlConnection = builder.Configuration.GetConnectionString("Railway");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
-
-builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
 {
@@ -29,9 +29,9 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-app.UseCors("AllowAll"); // Deve vir antes do HTTPS Redirection
-app.UseHttpsRedirection();
-app.UseSwagger();
-app.UseSwaggerUI();
-app.MapControllers();
-app.Run();
+    app.UseCors("AllowAll");
+    app.UseHttpsRedirection();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    app.MapControllers();
+    app.Run();
