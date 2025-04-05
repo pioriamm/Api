@@ -10,6 +10,8 @@ var stringConexaoBanco = builder.Configuration.GetConnectionString("Railway");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(stringConexaoBanco, ServerVersion.AutoDetect(stringConexaoBanco)));
 
 builder.Services.AddControllers();
+builder.WebHost.UseUrls("http://0.0.0.0:5032");
+
 
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";

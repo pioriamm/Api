@@ -44,12 +44,9 @@ public class JornadaController : ControllerBase
         return Ok(listaJornadas);
     }
     
-    [HttpGet("ListarTodasJornadasData/{motorista}")]
-    public ActionResult<IEnumerable<object>> ListarTodasJornadasData(string motorista)
+    [HttpGet("ListarTodasJornadasData/{dataInicio}/{dataFim}/{motorista}")]
+    public ActionResult<IEnumerable<object>> ListarTodasJornadasData(DateOnly dataInicio, DateOnly dataFim,  string motorista)
     {
-        var hoje = DateTime.Now;
-        var dataInicio = new DateOnly(hoje.Year, hoje.Month-1, 20);
-        var dataFim = DateOnly.FromDateTime(DateTime.Now);
     
         if (string.IsNullOrEmpty(motorista))
             return BadRequest("Parâmetros inválidos.");
@@ -58,8 +55,8 @@ public class JornadaController : ControllerBase
             return BadRequest("ID do motorista inválido.");
 
         var jornadaFiltrada = _context.Jornadas
-            .Where(jornada => jornada.JornadaData >= dataInicio 
-                              && jornada.JornadaData <= dataFim 
+            .Where(jornada => jornada.JornadaData >= dataInicio
+                              && jornada.JornadaData <= dataFim
                               && jornada.MotoristaID == motoristaId)
             .ToList();
 
@@ -67,7 +64,7 @@ public class JornadaController : ControllerBase
     }
 
     
-    [HttpGet("porMotoristaID/{id}")] 
+    [HttpGet("buscarJornadaPorMotoristaID/{id}")] 
     public ActionResult<IEnumerable<object>> ListarTodasJornadasPeloMotorista(Guid id)
     {
         var listaJornadas = _context.Jornadas?
@@ -94,9 +91,8 @@ public class JornadaController : ControllerBase
         return Ok(listaJornadas);
     }
     
-    
 
-    [HttpGet("porID/{id}")] 
+    [HttpGet("buscarJornadaPorID/{id}")] 
     public ActionResult<Jornada> ObterJornadaPeloId(Guid id )
     {
         var jornada = _context.Jornadas?
@@ -157,7 +153,7 @@ public class JornadaController : ControllerBase
 
 
     [HttpGet("auditoria/{dataInicio}/{dataFim}/{motorista}")]
-    public ActionResult<double> Auditoria(DateOnly dataInicio, DateOnly dataFim, string motorista)
+    public ActionResult<double> Auditoria(DateTime dataInicio, DateTime dataFim, string motorista)
     {
         if (string.IsNullOrEmpty(motorista))
             return BadRequest("Parâmetros inválidos.");
@@ -166,8 +162,8 @@ public class JornadaController : ControllerBase
             return BadRequest("ID do motorista inválido.");
 
         var jornadaFiltrada = _context.Jornadas
-            .Where(jornada => jornada.JornadaData >= dataInicio 
-                              && jornada.JornadaData <= dataFim 
+            .Where(jornada => jornada.JornadaData >= DateOnly.FromDateTime(dataInicio)
+                              && jornada.JornadaData <= DateOnly.FromDateTime(dataFim)
                               && jornada.MotoristaID == motoristaId)
             .Sum(jornada => jornada.Km);
 
