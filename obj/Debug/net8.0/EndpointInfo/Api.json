@@ -50,56 +50,26 @@
         }
       }
     },
-    "/Jornada": {
-      "get": {
-        "tags": [
-          "Jornada"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": { }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": { }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/criarCondutor": {
       "post": {
         "tags": [
-          "Jornada"
+          "Condutor"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Jornada"
+                "$ref": "#/components/schemas/Motorista"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/Jornada"
+                "$ref": "#/components/schemas/Motorista"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/Jornada"
+                "$ref": "#/components/schemas/Motorista"
               }
             }
           }
@@ -110,17 +80,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Jornada"
+                  "$ref": "#/components/schemas/Motorista"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Jornada"
+                  "$ref": "#/components/schemas/Motorista"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Jornada"
+                  "$ref": "#/components/schemas/Motorista"
                 }
               }
             }
@@ -128,12 +98,106 @@
         }
       }
     },
-    "/Jornada/ListarTodasJornadasData/{motorista}": {
+    "/listarCondutor": {
+      "get": {
+        "tags": [
+          "Condutor"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jornada/listarTodasJornadas": {
+      "get": {
+        "tags": [
+          "Jornada"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Jornada"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Jornada"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Jornada"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Jornada/ListarTodasJornadasData/{dataInicio}/{dataFim}/{motorista}": {
       "get": {
         "tags": [
           "Jornada"
         ],
         "parameters": [
+          {
+            "name": "dataInicio",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dataFim",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
           {
             "name": "motorista",
             "in": "path",
@@ -170,7 +234,7 @@
         }
       }
     },
-    "/Jornada/porMotoristaID/{id}": {
+    "/Jornada/buscarJornadaPorMotoristaID/{id}": {
       "get": {
         "tags": [
           "Jornada"
@@ -213,7 +277,7 @@
         }
       }
     },
-    "/Jornada/porID/{id}": {
+    "/Jornada/buscarJornadaPorID/{id}": {
       "get": {
         "tags": [
           "Jornada"
@@ -294,6 +358,54 @@
         }
       }
     },
+    "/Jornada/criarNovaJornada": {
+      "post": {
+        "tags": [
+          "Jornada"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Jornada"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Jornada"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Jornada"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jornada"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jornada"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Jornada"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Jornada/auditoria/{dataInicio}/{dataFim}/{motorista}": {
       "get": {
         "tags": [
@@ -306,7 +418,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "date"
+              "format": "date-time"
             }
           },
           {
@@ -315,7 +427,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "date"
+              "format": "date-time"
             }
           },
           {
@@ -401,6 +513,7 @@
       "Motorista": {
         "required": [
           "displayName",
+          "isAdim",
           "login",
           "passWord",
           "telefone"
@@ -432,6 +545,9 @@
             "maxLength": 15,
             "minLength": 0,
             "type": "string"
+          },
+          "isAdim": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
