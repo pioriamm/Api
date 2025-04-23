@@ -25,8 +25,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
+builder.WebHost.UseUrls("http://0.0.0.0:5032");
 
 var app = builder.Build();
 
@@ -39,6 +39,6 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseCors("AllowAll");
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
