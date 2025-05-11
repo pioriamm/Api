@@ -44,7 +44,8 @@ namespace Api.Controllers
         public ActionResult<IEnumerable<Motorista>> listarTodosMotoristas()
         {
 
-            var listaMotorista = _context.Motoristas?.ToList().Select(motorista => new{ motorista.DisplayName, motorista.MotoristaID });
+            var listaMotorista = _context.Motoristas?.ToList().Select(motorista => new{  motorista.MotoristaID, 
+                motorista.DisplayName, motorista.Telefone, motorista.Login, motorista.isAdim });
 
             if (listaMotorista == null || !listaMotorista.Any())
             {
@@ -52,6 +53,29 @@ namespace Api.Controllers
             }
 
             return Ok(listaMotorista);
+        }
+
+        [HttpPost("atualizarCondutor")]
+        public ActionResult<Motorista> atualizarCondutor([FromBody] Motorista motoristaAtualizado)
+
+        {
+            if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });
+
+            var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.MotoristaID == motoristaAtualizado.MotoristaID);
+
+            if (motoristaBanco == null)
+            {
+                return NotFound("Nenhuma motorista encontrado no banco.");
+            }
+            motoristaBanco.DisplayName = motoristaAtualizado.DisplayName?.ToUpper();
+            motoristaBanco.Login = $"{motoristaAtualizado.DisplayName?.Split(' ')[0]}@novohorizonte.com.br";
+            motoristaBanco.PassWord = motoristaAtualizado.PassWord;
+            motoristaBanco.Telefone = Regex.Replace(motoristaAtualizado.Telefone, @"[\s\+\-]", "");
+            motoristaBanco.isAdim = motoristaAtualizado.isAdim;
+
+            _context.SaveChanges();
+
+            return Ok(motoristaBanco);
         }
 
     }

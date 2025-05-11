@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "Api.Controllers.CondutorController",
+    "Method": "atualizarCondutor",
+    "RelativePath": "atualizarCondutor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "motoristaAtualizado",
+        "Type": "Api.Models.Motorista",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api.Models.Motorista",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Api.Controllers.AuthController",
     "Method": "Get",
     "RelativePath": "Auth/credenciais",
