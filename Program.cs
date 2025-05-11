@@ -13,8 +13,6 @@ if (builder.Environment.IsProduction())
     builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 }
 
-
-
 var mySqlConnection = builder.Configuration.GetConnectionString("Railway");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
 
@@ -32,7 +30,7 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
