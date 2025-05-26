@@ -65,7 +65,7 @@ namespace Api.Controllers
         
 
         [HttpPost("atualizarMotorista")]
-        public ActionResult<Motorista> atualizarCondutor([FromBody] Motorista motoristaAtualizado)
+        public ActionResult<MotoristaDto> atualizarCondutor([FromBody] Motorista motoristaAtualizado)
 
         {
             if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });
