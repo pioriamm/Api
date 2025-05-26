@@ -65,12 +65,12 @@ namespace Api.Controllers
         
 
         [HttpPost("atualizarMotorista")]
-        public ActionResult<MotoristaDto> atualizarCondutor([FromBody] Motorista motoristaAtualizado)
+        public ActionResult<MotoristaDto> atualizarCondutor([FromBody] MotoristaDto motoristaAtualizado)
 
         {
             if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });
 
-            var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.Id == motoristaAtualizado.Id);
+            var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.Id == motoristaAtualizado.id);
 
             if (motoristaBanco == null) return NotFound("Nenhuma motorista encontrado no banco.");
      
