@@ -121,4 +121,3 @@ C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\refint\Api.dll
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\Api.pdb
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\Api.genruntimeconfig.cache
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\ref\Api.dll
-C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
