@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "Api.Controllers.CondutorController",
+    "ContainingType": "Api.Controllers.MotoristaController",
     "Method": "atualizarCondutor",
-    "RelativePath": "atualizarCondutor",
+    "RelativePath": "atualizarMotorista",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -57,9 +57,9 @@
     ]
   },
   {
-    "ContainingType": "Api.Controllers.CondutorController",
-    "Method": "CriarNovoCondutor",
-    "RelativePath": "criarCondutor",
+    "ContainingType": "Api.Controllers.MotoristaController",
+    "Method": "criarNovoMotorista",
+    "RelativePath": "criarMotorista",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -306,9 +306,9 @@
     "EndpointName": "GetNovaJornada"
   },
   {
-    "ContainingType": "Api.Controllers.CondutorController",
+    "ContainingType": "Api.Controllers.MotoristaController",
     "Method": "listarTodosMotoristas",
-    "RelativePath": "listarCondutor",
+    "RelativePath": "listarMotorista",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -50,140 +50,6 @@
         }
       }
     },
-    "/criarCondutor": {
-      "post": {
-        "tags": [
-          "Condutor"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/listarCondutor": {
-      "get": {
-        "tags": [
-          "Condutor"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Motorista"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Motorista"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Motorista"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/atualizarCondutor": {
-      "post": {
-        "tags": [
-          "Condutor"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Motorista"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Motorista"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/Jornada/listarTodasJornadas": {
       "get": {
         "tags": [
@@ -555,6 +421,140 @@
                 "schema": {
                   "type": "number",
                   "format": "double"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/listarMotorista": {
+      "get": {
+        "tags": [
+          "Motorista"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Motorista"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/criarMotorista": {
+      "post": {
+        "tags": [
+          "Motorista"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/atualizarMotorista": {
+      "post": {
+        "tags": [
+          "Motorista"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Motorista"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Motorista"
                 }
               }
             }
