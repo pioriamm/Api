@@ -15,18 +15,50 @@ public class AuthController : ControllerBase
     {
         _context = context;
     }
-    
+
     [HttpGet("credenciais")]
-    public ActionResult<Motorista> Get([FromQuery] string login, [FromQuery] string senha)
+    public ActionResult Get([FromQuery] string login, [FromQuery] string senha)
     {
-        var motorista = _context.Motoristas?.FirstOrDefault(m => m.Login == login && m.PassWord == senha);
-
-        if (motorista == null)
+        try
         {
-            return NotFound(new { mensagem = "Credenciais inválidas" });
-        }
+            var motorista = _context.Motoristas?.FirstOrDefault(m => m.Login == login && m.PassWord == senha);
 
-        return Ok(new { motorista.Login, motorista.Telefone, motorista.DisplayName, motorista.Id, motorista.isAdim});
+            if (motorista == null)
+            {
+                return NotFound(new
+                {
+                    status = "400",
+                    erro = "",
+                    motorista = new { }
+                });
+            }
+
+            return Ok(new
+            {
+                status = "200",
+                erro = (string?)null,
+                motorista = new
+                {                   
+                   
+                    motorista.Id,
+                    motorista.DisplayName,
+                    motorista.isAdim,
+                    motorista.Login,
+                    motorista.Telefone,
+                    motorista.celularId,
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            return BadRequest(new
+            {
+                status = "500",
+                erro = e.Message,
+                motorista = new { }
+            });
+        }
     }
+
 
 }
