@@ -24,7 +24,8 @@ namespace Api.Controllers
                 motorista.DisplayName,
                 motorista.Telefone,
                 motorista.Login,
-                motorista.celularId
+                motorista.celularId,
+                motorista.isAdim
             });
 
             if (listaMotorista == null || !listaMotorista.Any())
