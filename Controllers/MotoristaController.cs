@@ -76,10 +76,8 @@ namespace Api.Controllers
      
             motoristaBanco.DisplayName = motoristaAtualizado.DisplayName;
             motoristaBanco.Login = $"{motoristaAtualizado.DisplayName?.Split(' ')[0]}@novohorizonte.com.br";
-            motoristaBanco.PassWord = motoristaAtualizado.PassWord;
             motoristaBanco.Telefone = Regex.Replace(motoristaAtualizado.Telefone, @"[\s\+\-]", "");
             motoristaBanco.isAdim = motoristaAtualizado.isAdim;
-            motoristaBanco.celularId = motoristaAtualizado.celularId;
             _context.SaveChanges();
             return Ok(motoristaBanco);
         }
