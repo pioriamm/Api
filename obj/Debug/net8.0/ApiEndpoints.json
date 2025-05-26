@@ -84,6 +84,32 @@
   },
   {
     "ContainingType": "Api.Controllers.JornadaController",
+    "Method": "AtualizarJornada",
+    "RelativePath": "Jornada/atualizarJornada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "jornadaDto",
+        "Type": "Api.Models.JornadaUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api.Models.JornadaUpdateDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api.Controllers.JornadaController",
     "Method": "Auditoria",
     "RelativePath": "Jornada/auditoria/{dataInicio}/{dataFim}/{motorista}",
     "HttpMethod": "GET",

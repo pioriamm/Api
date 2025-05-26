@@ -24,11 +24,11 @@ public class JornadaController : ControllerBase
            
 
         var listaJornadas = _context.Jornadas?
-            .Include(j => j.Motorista).ToList().Select(j => new
+            .Include(j => j.MotoristaID).ToList().Select(j => new
             {
-                j.QuilometragemId,
+                j.Id,
                 j.JornadaData,
-                JornadaHora = j.JornadaHora.ToString("HH:mm:ss"),
+               
                 j.MotoristaID,
                 j.Motorista.DisplayName,
                 j.Motorista.Telefone,
@@ -72,9 +72,8 @@ public class JornadaController : ControllerBase
             .Where(j => j.MotoristaID == id)
             .Select(j => new
             {
-                j.QuilometragemId,
-                j.JornadaData,
-                JornadaHora = j.JornadaHora.ToString("HH:mm:ss"),
+                j.Id,
+                j.JornadaData,            
                 j.MotoristaID,
                 j.Motorista.DisplayName,
                 j.Motorista.Telefone,
@@ -97,7 +96,7 @@ public class JornadaController : ControllerBase
     {
         var jornada = _context.Jornadas?
             .Include(j => j.Motorista)
-            .FirstOrDefault(j => j.QuilometragemId == id);;
+            .FirstOrDefault(j => j.Id == id);;
         
         if (jornada == null)
         {
@@ -105,9 +104,8 @@ public class JornadaController : ControllerBase
         }
         return Ok(new
         {
-            jornada.QuilometragemId,
-            jornada.JornadaData,
-            jornada.JornadaHora,
+            jornada.Id,
+            jornada.JornadaData,       
             jornada.MotoristaID,
             jornada.Motorista?.DisplayName,
             jornada.Placa,
@@ -121,7 +119,7 @@ public class JornadaController : ControllerBase
     {
         var jornada = _context.Jornadas?
             .Include(j => j.Motorista)
-            .FirstOrDefault(j => j.QuilometragemId == id);;
+            .FirstOrDefault(j => j.Id == id);;
         
         if (jornada == null)
         {
@@ -129,9 +127,8 @@ public class JornadaController : ControllerBase
         }
         return Ok(new
         {
-            jornada.QuilometragemId,
-            jornada.JornadaData,
-            jornada.JornadaHora,
+            jornada.Id,
+            jornada.JornadaData,          
             jornada.MotoristaID,
             jornada.Motorista?.Telefone,
             jornada.Placa,
@@ -150,6 +147,27 @@ public class JornadaController : ControllerBase
         
         return Ok(jornada);
     }
+
+    [HttpPost("atualizarJornada")]
+    public ActionResult<JornadaUpdateDto> AtualizarJornada([FromBody] JornadaUpdateDto jornadaDto)
+    {
+        if (jornadaDto == null)
+            return BadRequest("Dados inválidos.");
+
+        var jornada = _context.Jornadas.FirstOrDefault(j => j.Id == jornadaDto.Id);
+
+        if (jornada == null)     return NotFound("Jornada não encontrada.");
+
+        jornada.Placa = jornadaDto.Placa;
+        jornada.Km = jornadaDto.Km;
+        jornada.MotoristaID = jornadaDto.MotoristaID;
+        jornada.JornadaData = jornadaDto.JornadaData;
+        jornada.JornadaLocalidade = jornadaDto.JornadaLocalidade;
+        _context.SaveChanges();
+
+        return Ok(jornadaDto);
+    }
+
 
 
     [HttpGet("auditoria/{dataInicio}/{dataFim}/{motorista}")]

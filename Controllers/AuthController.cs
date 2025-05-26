@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
             return NotFound(new { mensagem = "Credenciais inválidas" });
         }
 
-        return Ok(new { motorista.Login, motorista.Telefone, motorista.DisplayName, motorista.MotoristaID, motorista.isAdim});
+        return Ok(new { motorista.Login, motorista.Telefone, motorista.DisplayName, motorista.Id, motorista.isAdim});
     }
 
 }

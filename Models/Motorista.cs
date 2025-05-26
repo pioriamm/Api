@@ -12,9 +12,11 @@ public class Motorista
 
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public Guid MotoristaID { get; set; }
+    public Guid Id { get; set; }
 
-    [Required] [StringLength(100)] public string? DisplayName { get; set; }
+    [Required] 
+    [StringLength(100)] 
+    public string? DisplayName { get; set; }
     
     [Required]
     [EmailAddress(ErrorMessage = "E-mail inválido.")]
@@ -23,7 +25,7 @@ public class Motorista
 
     [Required]
     [StringLength(9, MinimumLength = 1, ErrorMessage = "A senha deve ter no máximo 8 caracteres.")]
-    [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,8}$", ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial.")]
+    [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{1,9}$", ErrorMessage = "A senha deve conter pelo menos uma letra maiúscula, um número e um caractere especial.")]
     public string? PassWord { get; set; }
     
     [Required]
@@ -31,7 +33,10 @@ public class Motorista
     public string? Telefone { get; set; }
 
     [Required]
-    public bool? isAdim { get; set; }
+    public bool isAdim { get; set; }
+
+    [Required]
+    public string celularId { get; set; }
 
     [JsonIgnore]
     public ICollection<Jornada> Jornadas { get; set; }

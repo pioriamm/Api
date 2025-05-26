@@ -37,14 +37,14 @@ namespace Api.Controllers
             _context.Motoristas.Add(novoMotorista);
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(CriarNovoCondutor), new { id = motorista.MotoristaID }, new { usuarioCriado = true });
+            return CreatedAtAction(nameof(CriarNovoCondutor), new { id = motorista.Id }, new { usuarioCriado = true });
         }
 
         [HttpGet ("listarCondutor")]
         public ActionResult<IEnumerable<Motorista>> listarTodosMotoristas()
         {
 
-            var listaMotorista = _context.Motoristas?.ToList().Select(motorista => new{  motorista.MotoristaID, 
+            var listaMotorista = _context.Motoristas?.ToList().Select(motorista => new{  motorista.Id, 
                 motorista.DisplayName, motorista.Telefone, motorista.Login, motorista.isAdim });
 
             if (listaMotorista == null || !listaMotorista.Any())
@@ -61,7 +61,7 @@ namespace Api.Controllers
         {
             if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });
 
-            var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.MotoristaID == motoristaAtualizado.MotoristaID);
+            var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.Id == motoristaAtualizado.Id);
 
             if (motoristaBanco == null)
             {

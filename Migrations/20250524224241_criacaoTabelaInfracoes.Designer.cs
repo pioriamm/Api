@@ -4,6 +4,7 @@ using Api.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250524224241_criacaoTabelaInfracoes")]
+    partial class criacaoTabelaInfracoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +31,7 @@ namespace Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("JornadaId")
+                    b.Property<Guid?>("JornadaQuilometragemId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("descricaoInfracao")
@@ -41,14 +44,14 @@ namespace Api.Migrations
 
                     b.HasKey("infracaoId");
 
-                    b.HasIndex("JornadaId");
+                    b.HasIndex("JornadaQuilometragemId");
 
                     b.ToTable("infracoes");
                 });
 
             modelBuilder.Entity("Api.Models.Jornada", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("QuilometragemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -71,7 +74,7 @@ namespace Api.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
 
-                    b.HasKey("Id");
+                    b.HasKey("QuilometragemId");
 
                     b.HasIndex("MotoristaID");
 
@@ -80,7 +83,7 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Api.Models.Motorista", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("MotoristaID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
@@ -110,7 +113,7 @@ namespace Api.Migrations
                     b.Property<bool>("isAdim")
                         .HasColumnType("tinyint(1)");
 
-                    b.HasKey("Id");
+                    b.HasKey("MotoristaID");
 
                     b.ToTable("Motoristas");
                 });
@@ -119,7 +122,7 @@ namespace Api.Migrations
                 {
                     b.HasOne("Api.Models.Jornada", null)
                         .WithMany("infracoes")
-                        .HasForeignKey("JornadaId");
+                        .HasForeignKey("JornadaQuilometragemId");
                 });
 
             modelBuilder.Entity("Api.Models.Jornada", b =>

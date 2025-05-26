@@ -454,6 +454,54 @@
         }
       }
     },
+    "/Jornada/atualizarJornada": {
+      "post": {
+        "tags": [
+          "Jornada"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JornadaUpdateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JornadaUpdateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JornadaUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JornadaUpdateDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JornadaUpdateDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JornadaUpdateDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Jornada/auditoria/{dataInicio}/{dataFim}/{motorista}": {
       "get": {
         "tags": [
@@ -520,14 +568,14 @@
       "Jornada": {
         "required": [
           "jornadaData",
-          "jornadaHora",
+          "jornadaLocalidade",
           "km",
           "motoristaID",
           "placa"
         ],
         "type": "object",
         "properties": {
-          "quilometragemId": {
+          "id": {
             "type": "string",
             "format": "uuid"
           },
@@ -535,9 +583,10 @@
             "type": "string",
             "format": "date"
           },
-          "jornadaHora": {
-            "type": "string",
-            "format": "date-time"
+          "jornadaLocalidade": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string"
           },
           "motoristaID": {
             "type": "string",
@@ -558,8 +607,39 @@
         },
         "additionalProperties": false
       },
+      "JornadaUpdateDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jornadaData": {
+            "type": "string",
+            "format": "date"
+          },
+          "jornadaLocalidade": {
+            "type": "string",
+            "nullable": true
+          },
+          "motoristaID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "placa": {
+            "type": "string",
+            "nullable": true
+          },
+          "km": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "Motorista": {
         "required": [
+          "celularId",
           "displayName",
           "isAdim",
           "login",
@@ -568,7 +648,7 @@
         ],
         "type": "object",
         "properties": {
-          "motoristaID": {
+          "id": {
             "type": "string",
             "format": "uuid"
           },
@@ -586,7 +666,7 @@
           "passWord": {
             "maxLength": 9,
             "minLength": 1,
-            "pattern": "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{1,8}$",
+            "pattern": "^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{1,9}$",
             "type": "string"
           },
           "telefone": {
@@ -596,6 +676,10 @@
           },
           "isAdim": {
             "type": "boolean"
+          },
+          "celularId": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
