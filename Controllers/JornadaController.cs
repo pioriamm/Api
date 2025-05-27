@@ -137,15 +137,26 @@ public class JornadaController : ControllerBase
     }
     
 
-    [HttpPost ("criarNovaJornada")]
-    public ActionResult<Jornada> RegistrarNovaJornada([FromBody] Jornada jornada)
+    [HttpPost("criarNovaJornada")]
+    public ActionResult<JornadaUpdateDto> RegistrarNovaJornada([FromBody] JornadaUpdateDto jornadaDto)
     {
-        if (jornada == null) return BadRequest();
-        
+        if (jornadaDto == null) return BadRequest();
+
+ 
+        var jornada = new Jornada
+        {
+            Id = jornadaDto.Id,
+            JornadaData = jornadaDto.JornadaData,
+            JornadaLocalidade = jornadaDto.JornadaLocalidade.ToUpper(),
+            MotoristaID = jornadaDto.MotoristaID,
+            Placa = jornadaDto.Placa.ToUpper(),
+            Km = jornadaDto.Km
+        };
+
         _context.Jornadas?.Add(jornada);
         _context.SaveChanges();
-        
-        return Ok(jornada);
+
+        return Ok(jornadaDto);
     }
 
     [HttpPost("atualizarJornada")]

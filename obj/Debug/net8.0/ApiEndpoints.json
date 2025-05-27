@@ -195,14 +195,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "jornada",
-        "Type": "Api.Models.Jornada",
+        "Name": "jornadaDto",
+        "Type": "Api.Models.JornadaUpdateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.Jornada",
+        "Type": "Api.Models.JornadaUpdateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
