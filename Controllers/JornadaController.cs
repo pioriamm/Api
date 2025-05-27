@@ -24,16 +24,17 @@ public class JornadaController : ControllerBase
            
 
         var listaJornadas = _context.Jornadas?
-            .Include(j => j.MotoristaID).ToList().Select(j => new
+            .Include(j => j.Motorista).ToList().Select(j => new
             {
                 j.Id,
                 j.JornadaData,
-               
+                j.Placa,
+                j.Km,
+                j.JornadaLocalidade,
                 j.MotoristaID,
                 j.Motorista.DisplayName,
                 j.Motorista.Telefone,
-                j.Placa,
-                j.Km
+              
             });
 
         if (listaJornadas == null || !listaJornadas.Any())
