@@ -21,7 +21,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            var motorista = _context.Motoristas?.FirstOrDefault(m => m.Login == login && m.PassWord == senha);
+            var motorista = _context.Motoristas?.FirstOrDefault(m => m.Login.ToLower() == login.ToLower() && m.PassWord == senha);
 
             if (motorista == null)
             {
