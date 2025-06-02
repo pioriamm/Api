@@ -49,7 +49,7 @@ namespace Api.Controllers
             var novoMotorista = new Motorista
             {
                 DisplayName = motorista.DisplayName,
-                Login = $"{motorista.DisplayName?.Split(' ')[0]}@novohorizonte.com.br",
+                Login = $"{motorista.DisplayName?.Split(' ')[0]}@nhl.com.br",
                 PassWord = motorista.PassWord,
                 Telefone =  Regex.Replace(motorista.Telefone, @"[\s\+\-]", ""),
                 isAdim = motorista.isAdim,
@@ -75,7 +75,7 @@ namespace Api.Controllers
             if (motoristaBanco == null) return NotFound("Nenhuma motorista encontrado no banco.");
      
             motoristaBanco.DisplayName = motoristaAtualizado.DisplayName;
-            motoristaBanco.Login = $"{motoristaAtualizado.DisplayName?.Split(' ')[0]}@novohorizonte.com.br";
+            motoristaBanco.Login = $"{motoristaAtualizado.DisplayName?.Split(' ')[0]}nhl.com.br";
             motoristaBanco.Telefone = Regex.Replace(motoristaAtualizado.Telefone, @"[\s\+\-]", "");
             motoristaBanco.isAdim = motoristaAtualizado.isAdim;
 
