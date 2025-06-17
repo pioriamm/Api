@@ -1,4 +1,5 @@
 ﻿using Api.Context;
+using Api.Models.DTO;
 using Api.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,48 @@ namespace Api.Controllers
             _context.SaveChanges();
 
             return CreatedAtAction(nameof(novaInfracao), new { id = infracoes.infracaoId }, new { novaInfracao = true });
+        }
+
+        [HttpGet("ListarInfracoesPorPeriodo/{dataInicio}/{dataFim}/{idMotorista}")]
+        public ActionResult<IEnumerable<object>> ListarInfracoesPorPeriodo(DateOnly dataInicio, DateOnly dataFim, string motorista)
+        {
+
+            if (string.IsNullOrEmpty(motorista))
+                return BadRequest("Parâmetros inválidos.");
+
+            if (!Guid.TryParse(motorista, out Guid idMotorista))
+                return BadRequest("ID do motorista inválido.");
+
+            var infracoesFiltradas = _context.infracoes
+                .Where(infracoes => infracoes.entradaInfracao >= dataInicio
+                                  && infracoes.saidaInfracao <= dataFim
+                                  && infracoes.MotoristaId == idMotorista)
+                .ToList();
+
+            return Ok(infracoesFiltradas);
+        }
+
+
+        [HttpPost("atualizarinfracoes")]
+        public ActionResult<Infracoes> AtualizarInfracoes([FromBody] Infracoes infracoes)
+        {
+            if (infracoes == null)
+                return BadRequest("Dados inválidos.");
+
+            var editarInfracao = _context.infracoes.FirstOrDefault(j => j.infracaoId == infracoes.infracaoId);
+
+            if (editarInfracao == null) return NotFound("Jornada não encontrada.");
+
+            editarInfracao.velocidade = infracoes.velocidade;
+            editarInfracao.reclamacao = infracoes.reclamacao;
+            editarInfracao.multa = infracoes.multa;
+            editarInfracao.pequenaMonta = infracoes.pequenaMonta;
+            editarInfracao.grandeMonta = infracoes.grandeMonta;
+            editarInfracao.entradaInfracao = infracoes.entradaInfracao;
+            editarInfracao.saidaInfracao = infracoes.saidaInfracao;
+            _context.SaveChanges();
+
+            return Ok(editarInfracao);
         }
     }
 }

@@ -1,5 +1,31 @@
 [
   {
+    "ContainingType": "Api.Controllers.InfracoesController",
+    "Method": "AtualizarInfracoes",
+    "RelativePath": "atualizarinfracoes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "infracoes",
+        "Type": "Api.Models.Entity.Infracoes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api.Models.Entity.Infracoes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Api.Controllers.MotoristaController",
     "Method": "atualizarCondutor",
     "RelativePath": "atualizarMotorista",
@@ -9,13 +35,13 @@
     "Parameters": [
       {
         "Name": "motoristaAtualizado",
-        "Type": "Api.Models.MotoristaDto",
+        "Type": "Api.Models.DTO.MotoristaDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.MotoristaDto",
+        "Type": "Api.Models.DTO.MotoristaDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -42,9 +68,40 @@
         "Name": "senha",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "idCelular",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api.Controllers.InfracoesController",
+    "Method": "criarNovaInfracao",
+    "RelativePath": "criarInfracoes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "infracoes",
+        "Type": "Api.Models.Entity.Infracoes",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api.Models.Entity.Infracoes",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Api.Controllers.MotoristaController",
@@ -56,13 +113,13 @@
     "Parameters": [
       {
         "Name": "motorista",
-        "Type": "Api.Models.Motorista",
+        "Type": "Api.Models.Entity.Motorista",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.Motorista",
+        "Type": "Api.Models.Entity.Motorista",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -82,13 +139,13 @@
     "Parameters": [
       {
         "Name": "jornadaDto",
-        "Type": "Api.Models.JornadaUpdateDto",
+        "Type": "Api.Models.DTO.JornadaUpdateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.JornadaUpdateDto",
+        "Type": "Api.Models.DTO.JornadaUpdateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -150,7 +207,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.Jornada",
+        "Type": "Api.Models.Entity.Jornada",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -196,13 +253,13 @@
     "Parameters": [
       {
         "Name": "jornadaDto",
-        "Type": "Api.Models.JornadaUpdateDto",
+        "Type": "Api.Models.DTO.JornadaUpdateDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.JornadaUpdateDto",
+        "Type": "Api.Models.DTO.JornadaUpdateDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -222,7 +279,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api.Models.Jornada, Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api.Models.Entity.Jornada, Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -284,7 +341,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Api.Models.Jornada",
+        "Type": "Api.Models.Entity.Jornada",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -296,6 +353,47 @@
     "EndpointName": "GetNovaJornada"
   },
   {
+    "ContainingType": "Api.Controllers.InfracoesController",
+    "Method": "ListarInfracoesPorPeriodo",
+    "RelativePath": "ListarInfracoesPorPeriodo/{dataInicio}/{dataFim}/{idMotorista}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dataInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": true
+      },
+      {
+        "Name": "dataFim",
+        "Type": "System.DateOnly",
+        "IsRequired": true
+      },
+      {
+        "Name": "motorista",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "idMotorista",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Api.Controllers.MotoristaController",
     "Method": "listarTodosMotoristas",
     "RelativePath": "listarMotorista",
@@ -305,7 +403,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api.Models.Motorista, Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api.Models.Entity.Motorista, Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
