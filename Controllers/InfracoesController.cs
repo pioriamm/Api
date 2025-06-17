@@ -51,7 +51,7 @@ namespace Api.Controllers
                 return BadRequest("Parâmetros inválidos.");
 
             if (!Guid.TryParse(motorista, out Guid idMotorista))
-                return BadRequest("ID do motorista inválido.");
+                return BadRequest("ID do infracao inválido.");
 
             var infracoesFiltradas = _context.infracoes
                 .Where(infracoes => infracoes.entradaInfracao >= dataInicio
