@@ -17,7 +17,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet("credenciais")]
-    public ActionResult Get([FromQuery] string login, [FromQuery] string senha)
+    public ActionResult Get([FromQuery] string login, [FromQuery] string senha, [FromQuery] string idCelular)
     {
         try
         {
@@ -33,12 +33,16 @@ public class AuthController : ControllerBase
                 });
             }
 
+            motorista.celularId = idCelular;
+            _context.Motoristas.Update(motorista);
+            _context.SaveChanges();
+
             return Ok(new
             {
                 status = "200",
                 erro = (string?)null,
                 motorista = new
-                {                   
+                {           
                    
                     motorista.Id,
                     motorista.DisplayName,
