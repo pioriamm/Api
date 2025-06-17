@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Api.Models
 {
@@ -9,13 +10,26 @@ namespace Api.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid infracaoId { get; set; }
+        [Required]
+        public DateOnly entradaInfracao { get; set; }
+        [Required]
+        public DateOnly saidaInfracao { get; set; }
+        [Required]       
+        public bool velocidade { get; set; }
+        [Required]
+        public bool reclamacao { get; set; }
+        [Required]
+        public bool multa { get; set; }
+        [Required]
+        public bool pequenaMonta { get; set; }
+        [Required]
+        public bool grandeMonta { get; set; }
 
         [Required]
-        [StringLength(250)]
-        public string descricaoInfracao{ get; set; }
+        public Guid MotoristaId { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(10,2)")]
-        public decimal pontuacao { get; set; }
+        [ForeignKey("MotoristaId")]
+        public Motorista Motorista { get; set; }
+
     }
 }

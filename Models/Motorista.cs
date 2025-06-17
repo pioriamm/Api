@@ -32,6 +32,9 @@ public class Motorista
     [StringLength(15)]
     public string? Telefone { get; set; }
 
+    [Required]   
+    public DateOnly admissao { get; set; }
+
     [Required]
     public bool isAdim { get; set; }
 
@@ -40,6 +43,9 @@ public class Motorista
 
     [JsonIgnore]
     public ICollection<Jornada> Jornadas { get; set; }
-    
- 
+
+    [JsonIgnore]
+    public ICollection<Infracoes> Infracoes { get; set; }
+
+
 }

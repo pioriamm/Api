@@ -33,11 +33,4 @@ public class Jornada
     [Column(TypeName = "decimal(10,2)")]
     public decimal Km { get; set; }
 
-    [JsonIgnore]
-    public ICollection<Infracoes>? infracoes { get; set; }
-
-   
-
-
-
-}
+    }

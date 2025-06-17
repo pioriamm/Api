@@ -4,6 +4,7 @@ using Api.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250617113442_relacionamentoInfracoes")]
+    partial class relacionamentoInfracoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,33 +31,15 @@ namespace Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("MotoristaId")
-                        .HasColumnType("char(36)");
+                    b.Property<string>("descricaoInfracao")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
 
-                    b.Property<DateOnly>("entradaInfracao")
-                        .HasColumnType("date");
-
-                    b.Property<bool>("grandeMonta")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("multa")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("pequenaMonta")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("reclamacao")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateOnly>("saidaInfracao")
-                        .HasColumnType("date");
-
-                    b.Property<bool>("velocidade")
-                        .HasColumnType("tinyint(1)");
+                    b.Property<decimal>("pontuacao")
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("infracaoId");
-
-                    b.HasIndex("MotoristaId");
 
                     b.ToTable("infracoes");
                 });
@@ -116,9 +101,6 @@ namespace Api.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
-                    b.Property<DateOnly>("admissao")
-                        .HasColumnType("date");
-
                     b.Property<string>("celularId")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -129,13 +111,6 @@ namespace Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Motoristas");
-                });
-
-            modelBuilder.Entity("Api.Models.Infracoes", b =>
-                {
-                    b.HasOne("Api.Models.Motorista", null)
-                        .WithMany("Infracoes")
-                        .HasForeignKey("MotoristaId");
                 });
 
             modelBuilder.Entity("Api.Models.Jornada", b =>
@@ -151,8 +126,6 @@ namespace Api.Migrations
 
             modelBuilder.Entity("Api.Models.Motorista", b =>
                 {
-                    b.Navigation("Infracoes");
-
                     b.Navigation("Jornadas");
                 });
 #pragma warning restore 612, 618
