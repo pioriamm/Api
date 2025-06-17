@@ -1,5 +1,6 @@
 ﻿using Api.Context;
-using Api.Models;
+using Api.Models.DTO;
+using Api.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Api.Models
+namespace Api.Models.Entity
 {
     public class Infracoes
     {
@@ -28,6 +28,7 @@ namespace Api.Models
         [Required]
         public Guid MotoristaId { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("MotoristaId")]
         public Motorista Motorista { get; set; }
 

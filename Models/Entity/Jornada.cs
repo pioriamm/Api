@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Api.Models;
+namespace Api.Models.Entity;
 
 [Table("Jornada")]
 public class Jornada

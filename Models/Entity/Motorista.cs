@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 using Api.Context;
 using Microsoft.VisualBasic;
 
-namespace Api.Models;
+namespace Api.Models.Entity;
+
 using System.Collections.ObjectModel;
 
 public class Motorista

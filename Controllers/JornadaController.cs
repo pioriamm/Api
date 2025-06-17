@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Api.Context;
-using Api.Models;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Api.Models.DTO;
+using Api.Models.Entity;
 
 
 namespace Api.Controllers;
