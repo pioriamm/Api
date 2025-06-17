@@ -44,19 +44,19 @@ namespace Api.Controllers
         }
 
         [HttpGet("ListarInfracoesPorPeriodo/{dataInicio}/{dataFim}/{idMotorista}")]
-        public ActionResult<IEnumerable<object>> ListarInfracoesPorPeriodo(DateOnly dataInicio, DateOnly dataFim, string motorista)
+        public ActionResult<IEnumerable<object>> ListarInfracoesPorPeriodo(DateOnly dataInicio, DateOnly dataFim, string idMotorista)
         {
 
-            if (string.IsNullOrEmpty(motorista))
+            if (string.IsNullOrEmpty(idMotorista))
                 return BadRequest("Parâmetros inválidos.");
 
-            if (!Guid.TryParse(motorista, out Guid idMotorista))
+            if (!Guid.TryParse(idMotorista, out Guid motoristaId))
                 return BadRequest("ID do infracao inválido.");
 
             var infracoesFiltradas = _context.infracoes
                 .Where(infracoes => infracoes.entradaInfracao >= dataInicio
                                   && infracoes.saidaInfracao <= dataFim
-                                  && infracoes.MotoristaId == idMotorista)
+                                  && infracoes.MotoristaId == motoristaId)
                 .ToList();
 
             return Ok(infracoesFiltradas);
