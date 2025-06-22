@@ -26,7 +26,7 @@ namespace Api.Controllers
                 motorista.Telefone,
                 motorista.Login,
                 motorista.celularId,
-                motorista.isAdim
+                motorista.perfilAcesso
             });
 
             if (listaMotorista == null || !listaMotorista.Any())
@@ -53,7 +53,7 @@ namespace Api.Controllers
                 Login = $"{motorista.DisplayName?.Split(' ')[0]}@nhl.com.br",
                 PassWord = motorista.PassWord,
                 Telefone =  Regex.Replace(motorista.Telefone, @"[\s\+\-]", ""),
-                isAdim = motorista.isAdim,
+                perfilAcesso = motorista.perfilAcesso,
                 celularId = motorista.celularId
             };
 
@@ -69,16 +69,16 @@ namespace Api.Controllers
         public ActionResult<MotoristaDto> atualizarCondutor([FromBody] MotoristaDto motoristaAtualizado)
 
         {
-            if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });
+            if (motoristaAtualizado == null) return BadRequest(new { erro = "É preciso passar os dados para se editado" });            
 
             var motoristaBanco = _context.Motoristas.FirstOrDefault(m => m.Id == motoristaAtualizado.id);
 
             if (motoristaBanco == null) return NotFound("Nenhuma motorista encontrado no banco.");
-     
+
             motoristaBanco.DisplayName = motoristaAtualizado.DisplayName;
             motoristaBanco.Login = $"{motoristaAtualizado.DisplayName?.Split(' ')[0]}nhl.com.br";
             motoristaBanco.Telefone = Regex.Replace(motoristaAtualizado.Telefone, @"[\s\+\-]", "");
-            motoristaBanco.isAdim = motoristaAtualizado.isAdim;
+            motoristaBanco.perfilAcesso = motoristaAtualizado.perfilAcesso;
 
             _context.SaveChanges();
             return Ok(motoristaBanco);

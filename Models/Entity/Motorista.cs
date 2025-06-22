@@ -37,7 +37,7 @@ public class Motorista
     public DateOnly admissao { get; set; }
 
     [Required]
-    public bool isAdim { get; set; }
+    public int perfilAcesso { get; set; }
 
     [Required]
     public string celularId { get; set; }

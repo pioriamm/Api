@@ -113,13 +113,6 @@
             }
           },
           {
-            "name": "motorista",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "idMotorista",
             "in": "path",
             "required": true,

@@ -46,7 +46,7 @@ public class AuthController : ControllerBase
                    
                     motorista.Id,
                     motorista.DisplayName,
-                    motorista.isAdim,
+                    motorista.perfilAcesso,
                     motorista.Login,
                     motorista.Telefone,
                     motorista.celularId,

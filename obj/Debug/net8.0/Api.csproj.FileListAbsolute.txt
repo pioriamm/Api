@@ -120,4 +120,3 @@ C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\rjimswa.dswa.cache.j
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\staticwebassets.build.json.cache
-C:\Users\Marcelo\source\repos\pioriamm\Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

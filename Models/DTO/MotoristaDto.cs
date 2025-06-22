@@ -6,6 +6,6 @@
         public string DisplayName { get; set; }
         
         public string Telefone { get; set; }
-        public bool isAdim { get; set; }
+        public int perfilAcesso { get; set; }
     }
 }
